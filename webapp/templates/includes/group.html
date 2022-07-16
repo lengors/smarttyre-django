@@ -1,0 +1,26 @@
+{% load i18n %}
+<div class="input-group has-validation">
+    <input type="{{ field.field.widget.input_type }}"
+           name="{{ field.name }}"
+           class="form-control {% if not field.field.disabled and field.errors %}is-invalid{% elif not field.field.disabled and field.form.has_changed %}is-valid{% endif %}"
+           id="{{ field.auto_id }}"
+           placeholder="{{ field.label }}"
+           required="{{ field.field.required }}"
+           {% if field.field.disabled %}readonly{% endif %}
+           {% if field.value %} value="{{ field.value }}"{% endif %}/>
+    {% if not field.field.disabled and field.help_text %}
+        <button type="button"
+                class="btn btn-outline-secondary btn-sm"
+                data-bs-toggle="collapse"
+                data-bs-target="#{{ field.auto_id }}-help"
+                aria-expanded="false"
+                aria-controls="{{ field.auto_id }}-help">
+            <i class="fa-solid fa-circle-info"></i>
+        </button>
+    {% endif %}
+    {% if not field.field.disabled and field.errors %}
+        <div class="invalid-feedback">{{ field.errors }}</div>
+    {% elif not field.field.disabled and field.form.has_changed %}
+        <div class="valid-feedback">{% translate "Looks good!" %}</div>
+    {% endif %}
+</div>

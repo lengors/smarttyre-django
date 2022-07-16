@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <form class="my-auto flex-fill align-self-center" method="post" novalidate>
+        {% csrf_token %}
+        <div class="row my-3">
+            <h1 class="mt-auto text-center fw-normal mb-0">{% translate "Sign up" %}</h1>
+        </div>
+        <div class="row">
+            <div class="col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 m-auto">
+                <div class="row">
+                    <div class="col-12 col-sm-6 mb-3">{% include "includes/field.html" with field=form.first_name %}</div>
+                    <div class="col-12 col-sm-6 mb-3">{% include "includes/field.html" with field=form.last_name %}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 m-auto">
+                {% include "includes/field.html" with field=form.username %}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 m-auto">
+                {% include "includes/field.html" with field=form.email %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 m-auto">
+                <div class="row">
+                    <div class="col-12 col-sm-6 mb-3">{% include "includes/field.html" with field=form.password1 %}</div>
+                    <div class="col-12 col-sm-6 mb-3">{% include "includes/field.html" with field=form.password2 %}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row d-block">
+            <div class="col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 m-auto">{% include "includes/help.html" with form=form %}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="w-auto m-auto">{{ form.captcha }}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3 col-xxl-2 m-auto">
+                <button type="submit" class="w-100 btn btn-primary">{% translate "Sign up" %}</button>
+            </div>
+        </div>
+        {% if form.non_field_errors %}
+            <div class="row mb-3">
+                <div class="col-10 col-sm-6 col-md-4 col-lg-3 col-xxl-2 m-auto">
+                    <div class="input-group has-validation">
+                        <input type="text" class="form-control is-invalid d-none" />
+                        <div class="invalid-feedback">{{ form.non_field_errors }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="row mb-3">
+            <small class="m-auto text-center">
+                <a class="link-primary" href="{% url "login" %}">{% translate "Already have an account?" %}</a>
+            </small>
+        </div>
+    </form>
+{% endblock content %}

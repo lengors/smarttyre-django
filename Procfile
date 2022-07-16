@@ -1,0 +1,1 @@
+web: gunicorn smarttyre.asgi:application -k uvicorn.workers.UvicornWorker

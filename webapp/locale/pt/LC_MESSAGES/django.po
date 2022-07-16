@@ -1,0 +1,558 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-15 18:22+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\webapp\forms.py:23
+msgid "Confirm password"
+msgstr "Confirme a palavra-passe"
+
+#: .\webapp\forms.py:45
+msgid "Passwords don't match."
+msgstr "As palvara-passes não são iguais."
+
+#: .\webapp\models.py:47 .\webapp\templates\accounts.html:17
+msgid "Username"
+msgstr "Utilizador"
+
+#: .\webapp\models.py:48
+msgid "Password"
+msgstr "Palavra-passe"
+
+#: .\webapp\reporter.py:72
+#, python-brace-format
+msgid "SmartTyre report {day}"
+msgstr "Relatório da aplicação SmartTyre do dia {day}"
+
+#: .\webapp\templates\accounts.html:7 .\webapp\templates\base.html:71
+msgid "Accounts"
+msgstr "Contas"
+
+#: .\webapp\templates\accounts.html:16 .\webapp\templates\accounts.html:259
+#: .\webapp\templates\management.html:89
+msgid "Website"
+msgstr "Website"
+
+#: .\webapp\templates\accounts.html:18 .\webapp\templates\management.html:90
+msgid "Action"
+msgstr "Ação"
+
+#: .\webapp\templates\accounts.html:27 .\webapp\templates\accounts.html:86
+msgid "Edit account"
+msgstr "Editar conta"
+
+#: .\webapp\templates\accounts.html:36
+msgid "Remove account"
+msgstr "Remover conta"
+
+#: .\webapp\templates\accounts.html:54
+msgid "Remove account - "
+msgstr "Remover conta - "
+
+#: .\webapp\templates\accounts.html:63
+#, python-format
+msgid ""
+"Are you sure you want to remove the account for the %(crawler)s website? "
+msgstr "Tem a certeza que quer remover a conta para o website %(crawler)s? "
+
+#: .\webapp\templates\accounts.html:71 .\webapp\templates\accounts.html:215
+#: .\webapp\templates\base.html:200 .\webapp\templates\management.html:71
+#: .\webapp\templates\management.html:132
+msgid "Yes"
+msgstr "Sim"
+
+#: .\webapp\templates\accounts.html:73 .\webapp\templates\accounts.html:219
+#: .\webapp\templates\base.html:202 .\webapp\templates\management.html:73
+#: .\webapp\templates\management.html:134
+msgid "No"
+msgstr "Não"
+
+#: .\webapp\templates\accounts.html:123 .\webapp\templates\accounts.html:336
+#: .\webapp\templates\accounts.html:405
+msgid "Close"
+msgstr "Fechar"
+
+#: .\webapp\templates\accounts.html:124 .\webapp\templates\accounts.html:339
+msgid "Save"
+msgstr "Guardar"
+
+#: .\webapp\templates\accounts.html:146
+msgid "No accounts found"
+msgstr "Nenhuma conta encontrada"
+
+#: .\webapp\templates\accounts.html:161 .\webapp\templates\accounts.html:240
+msgid "Add account"
+msgstr "Adicionar conta"
+
+#: .\webapp\templates\accounts.html:175 .\webapp\templates\accounts.html:366
+msgid "Import accounts"
+msgstr "Importar contas"
+
+#: .\webapp\templates\accounts.html:183 .\webapp\templates\accounts.html:199
+msgid "Remove all accounts"
+msgstr "Remover todas as contas"
+
+#: .\webapp\templates\accounts.html:207
+msgid "Are you sure you want to remove all accounts?"
+msgstr "Tem a certeza que pretende remover todas as contas?"
+
+#: .\webapp\templates\accounts.html:266
+msgid "Select a Website"
+msgstr "Selecione um Website"
+
+#: .\webapp\templates\accounts.html:291
+#: .\webapp\templates\includes\group.html:24
+msgid "Looks good!"
+msgstr "Parace bem!"
+
+#: .\webapp\templates\accounts.html:408
+msgid "Import"
+msgstr "Imporar"
+
+#: .\webapp\templates\base.html:65
+msgid "Home"
+msgstr "Início"
+
+#: .\webapp\templates\base.html:78 .\webapp\templates\management.html:6
+msgid "Management"
+msgstr "Gestão"
+
+#: .\webapp\templates\base.html:85
+msgid "Welcome,"
+msgstr "Bem-vindo,"
+
+#: .\webapp\templates\base.html:102 .\webapp\templates\profile.html:7
+msgid "Edit profile"
+msgstr "Editar perfil"
+
+#: .\webapp\templates\base.html:108 .\webapp\templates\base.html:188
+msgid "Delete profile"
+msgstr "Apagar perfil"
+
+#: .\webapp\templates\base.html:114
+msgid "Logout"
+msgstr "Sair"
+
+#: .\webapp\templates\base.html:195
+msgid "Are you sure you want to delete your profile?"
+msgstr "Tem a certeza que quer apagar o seu perfil?"
+
+#: .\webapp\templates\login.html:10
+msgid "Please sign in"
+msgstr "Por favor inicie sessão"
+
+#: .\webapp\templates\login.html:27 .\webapp\templates\password\reset.html:8
+msgid "Forgot your password?"
+msgstr "Esqueceu a sua palavra-passe?"
+
+#: .\webapp\templates\login.html:32
+msgid "Sign in"
+msgstr "Iniciar sessão"
+
+#: .\webapp\templates\login.html:47
+msgid "Need an account?"
+msgstr "Precisa de uma conta?"
+
+#: .\webapp\templates\mails\accept.html:3
+msgid "Welcome"
+msgstr "Bem-vindo"
+
+#: .\webapp\templates\mails\accept.html:3
+msgid ", your request for a new SmartTyre account has been accepted."
+msgstr ", o seu pedido para uma nova conta SmartTyre foi aceite."
+
+#: .\webapp\templates\mails\accept.html:4
+msgid "Please click on the link to confirm your registration,"
+msgstr "Por favor clique no link para confirmar o seu registo,"
+
+#: .\webapp\templates\mails\accept.html:7
+#: .\webapp\templates\mails\reject.html:6
+msgid ""
+"If you did not request a new SmartTyre account, please ignore this email."
+msgstr "Se não pediu uma nova conta SmartTyre, por favor ignore este email."
+
+#: .\webapp\templates\mails\change.html:3
+#: .\webapp\templates\mails\inform.html:3
+#: .\webapp\templates\mails\reject.html:3
+msgid "Hello"
+msgstr "Olá"
+
+#: .\webapp\templates\mails\change.html:3
+msgid ", your SmartTyre account email has been changed."
+msgstr ", o seu email da conta SmartTyre foi alterado."
+
+#: .\webapp\templates\mails\change.html:4
+msgid "Please click on the link to confirm your new email,"
+msgstr "Por favor clique no link para confirmar o seu novo email,"
+
+#: .\webapp\templates\mails\change.html:6
+#: .\webapp\templates\mails\inform.html:5
+msgid "If you did not request this action, please ignore this email."
+msgstr "Se não pediu esta acção, por favor ignore este email."
+
+#: .\webapp\templates\mails\inform.html:3
+msgid ""
+", you have request a new email. Once that email has been confirmed, the old "
+"email will be discarded."
+msgstr ""
+", você pediu um novo email. Uma vez que este email tenha sido confirmado, o "
+"antigo email será descartado."
+
+#: .\webapp\templates\mails\reject.html:3
+msgid ""
+", unfortunetely your request for a new SmartTyre account has been rejected."
+msgstr ""
+", infelizmente o seu pedido para uma nova conta SmartTyre foi rejeitado."
+
+#: .\webapp\templates\mails\reject.html:4
+msgid ""
+"If you believe this is an error, please respond to this email with the "
+"reason as to why you believe that."
+msgstr ""
+"Se você acredita que isto é um erro, por favor responda a este email com a "
+"razão para o qual você acredita que isto é um erro."
+
+#: .\webapp\templates\mails\report.html:3
+msgid "Request from"
+msgstr "Pedido de"
+
+#: .\webapp\templates\mails\report.html:3
+msgid " to create a new SmartTyre account."
+msgstr " para criar uma nova conta SmartTyre."
+
+#: .\webapp\templates\mails\report.html:4
+msgid "Please click on the link to confirm or deny the request,"
+msgstr "Por favor clique no link para confirmar ou rejeitar o pedido,"
+
+#: .\webapp\templates\management.html:21
+msgid "Crawlers' files"
+msgstr "Ficheiros dos crawlers"
+
+#: .\webapp\templates\management.html:31
+msgid "Upload"
+msgstr "Carregar"
+
+#: .\webapp\templates\management.html:42 .\webapp\templates\management.html:58
+msgid "Remove all crawlers"
+msgstr "Remover todos os crawlers"
+
+#: .\webapp\templates\management.html:65
+msgid "Are you sure you want to remove all crawlers?"
+msgstr "Tem a certeza que quer remover todos os crawlers?"
+
+#: .\webapp\templates\management.html:98
+msgid "Remove crawler"
+msgstr "Remover crawler"
+
+#: .\webapp\templates\management.html:115
+msgid "Remove crawler - "
+msgstr "Remover crawler - "
+
+#: .\webapp\templates\management.html:124
+msgid "Are you sure you want to remove "
+msgstr "Tem a certeza que quer remover "
+
+#: .\webapp\templates\management.html:124
+msgid " as a crawler?"
+msgstr " como crawler?"
+
+#: .\webapp\templates\management.html:145
+msgid "No crawlers found"
+msgstr "Crawlers não encontrados"
+
+#: .\webapp\templates\password\change.html:8
+msgid "Change your password"
+msgstr "Mudar a sua palavra-passe"
+
+#: .\webapp\templates\password\change.html:12
+msgid "Enter your old password bellow, as well as the new password."
+msgstr "Introduza a sua palavra-passe antiga, bem como a nova palavra-passe."
+
+#: .\webapp\templates\password\change.html:36
+msgid "Change password"
+msgstr "Mudar palavra-passe"
+
+#: .\webapp\templates\password\reset.html:10
+msgid ""
+"Enter your email address bellow, and we'll email instructions for setting a "
+"new password."
+msgstr ""
+"Introduza o seu email abaixo, e nós vamos enviar instruções para definir uma "
+"nova palavra-passe."
+
+#: .\webapp\templates\password\reset.html:24
+msgid "Send me instructions"
+msgstr "Enviar instruções"
+
+#: .\webapp\templates\password\reset\complete.html:6
+msgid "Password reset complete"
+msgstr "Palavra-passe redefinida"
+
+#: .\webapp\templates\password\reset\confirm.html:8
+msgid "Set a new password!"
+msgstr "Definir uma nova palavra-passe!"
+
+#: .\webapp\templates\password\reset\confirm.html:25
+msgid "Change my password"
+msgstr "Mudar a minha palavra-passe"
+
+#: .\webapp\templates\password\reset\confirm.html:41
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset "
+msgstr ""
+"O link de redefinição de palavra-passe era inválido, possivelmente porque já "
+"foi usado. Por favor, peça uma nova redefinição de palavra-passe "
+
+#: .\webapp\templates\password\reset\confirm.html:41
+msgid "here"
+msgstr "aqui"
+
+#: .\webapp\templates\password\reset\done.html:6
+msgid "Check your inbox"
+msgstr "Verifique a sua caixa de entrada"
+
+#: .\webapp\templates\profile.html:34
+msgid "Save changes"
+msgstr "Guardar alterações"
+
+#: .\webapp\templates\profile.html:37
+msgid "Edit password"
+msgstr "Editar palavra-passe"
+
+#: .\webapp\templates\register.html:7 .\webapp\templates\register.html:43
+msgid "Sign up"
+msgstr "Registar"
+
+#: .\webapp\templates\register.html:58
+msgid "Already have an account?"
+msgstr "Já tem uma conta?"
+
+#: .\webapp\templates\request.html:7
+msgid "Account request"
+msgstr "Pedido de conta"
+
+#: .\webapp\templates\request.html:38
+msgid "Accept"
+msgstr "Aceitar"
+
+#: .\webapp\templates\request.html:46
+msgid "Reject"
+msgstr "Rejeitar"
+
+#: .\webapp\validators.py:17
+msgid "The file already exists."
+msgstr "O ficheiro já existe."
+
+#: .\webapp\validators.py:23
+msgid "The file is not a valid crawler."
+msgstr "O ficheiro não é um crawler válido."
+
+#: .\webapp\validators.py:28
+msgid "The file is ambiguous. It contains more than one crawler."
+msgstr "O ficheiro é ambíguo. Contém mais de um crawler."
+
+#: .\webapp\validators.py:32
+msgid "The crawler class is not defined."
+msgstr "A classe do crawler não está definida."
+
+#: .\webapp\validators.py:53 .\webapp\validators.py:57
+msgid "The file is not a valid CSV file."
+msgstr "O ficheiro não é um ficheiro CSV válido."
+
+#: .\webapp\views.py:76
+msgid "New account was successfully added."
+msgstr "A nova conta foi adicionada com sucesso."
+
+#: .\webapp\views.py:92 .\webapp\views.py:138
+msgid "The account does not exist!"
+msgstr "A conta não existe!"
+
+#: .\webapp\views.py:109
+msgid ""
+"{str(user_crawler_credentials.crawler).capitalize()} account was "
+"successfully edited."
+msgstr ""
+"A conta relativa a {str(user_crawler_credentials.crawler).capitalize()} foi "
+"editada com sucesso."
+
+#: .\webapp\views.py:125
+msgid "All accounts were successfully deleted."
+msgstr "Todas as contas foram eliminadas com sucesso."
+
+#: .\webapp\views.py:148
+msgid ""
+"{str(user_crawler_credentials.crawler).capitalize()} account was "
+"successfully deleted."
+msgstr ""
+"A conta relativa a {str(user_crawler_credentials.crawler).capitalize()} foi "
+"eliminada com sucesso."
+
+#: .\webapp\views.py:211
+msgid "Accounts were successfully imported."
+msgstr "Contas importadas com sucesso."
+
+#: .\webapp\views.py:233 .\webapp\views.py:540
+msgid "You are already logged in!"
+msgstr "Já está autenticado!"
+
+#: .\webapp\views.py:250
+msgid "The activation link is invalid! Please try again!"
+msgstr "O link de ativação é inválido! Por favor, tente novamente!"
+
+#: .\webapp\views.py:257
+msgid "Your account request has been rejected!"
+msgstr "O seu pedido de conta foi rejeitado!"
+
+#: .\webapp\views.py:264
+msgid "Your account request has not been accepted yet!"
+msgstr "O seu pedido de conta ainda não foi aceite!"
+
+#: .\webapp\views.py:271
+msgid "Your account has already been activated!"
+msgstr "A sua conta já foi ativada!"
+
+#: .\webapp\views.py:278
+msgid ""
+"Your email address confirmation was a success! You can now login into your "
+"account!"
+msgstr ""
+"O seu endereço de email foi confirmado com sucesso! Agora pode autenticar-se "
+"na sua conta!"
+
+#: .\webapp\views.py:292
+msgid "Your password was successfully changed!"
+msgstr "A sua palavra-passe foi alterada com sucesso!"
+
+#: .\webapp\views.py:312 .\webapp\views.py:650
+msgid "You are not authorized to perform this action!"
+msgstr "Não tem autorização para executar esta ação!"
+
+#: .\webapp\views.py:334
+msgid "All crawlers were successfully deleted."
+msgstr "Todos os crawlers foram eliminados com sucesso."
+
+#: .\webapp\views.py:348
+msgid "The crawler does not exist!"
+msgstr "O crawler não existe!"
+
+#: .\webapp\views.py:358
+msgid "{str(crawler).capitalize()} crawler was successfully deleted."
+msgstr "{str(crawler).capitalize()} crawler foi eliminado com sucesso."
+
+#: .\webapp\views.py:406
+#, python-brace-format
+msgid "Error while uploading {file.name}: {error.message}"
+msgstr "Erro ao carregar {file.name}: {error.message}"
+
+#: .\webapp\views.py:413
+msgid "All files were uploaded successfully!"
+msgstr "Todos os ficheiros foram carregados com sucesso!"
+
+#: .\webapp\views.py:423
+#, python-brace-format
+msgid "Files uploaded successfully: {message}"
+msgstr "Ficheiros carregados com sucesso: {message}"
+
+#: .\webapp\views.py:464
+msgid "SmartTyre account email change."
+msgstr "Alteração de email da conta SmartTyre."
+
+#: .\webapp\views.py:475
+msgid "Confirm your SmartTyre account new email."
+msgstr "Confirme o seu novo email da conta SmartTyre."
+
+#: .\webapp\views.py:491
+msgid ""
+"Your email address has been changed! Please confirm your new email address. "
+"Once you confirm your new email address, you will be able to log in."
+msgstr ""
+"O seu endereço de email foi alterado! Por favor, confirme o seu novo "
+"endereço de email. Assim que confirmar o seu novo endereço de email, "
+
+#: .\webapp\views.py:503
+msgid "Your profile has been updated!"
+msgstr "O seu perfil foi atualizado!"
+
+#: .\webapp\views.py:567
+msgid "New SmartTyre account request"
+msgstr "Novo pedido de conta SmartTyre"
+
+#: .\webapp\views.py:583
+msgid ""
+"Your account has been created! Wait for our administration to either accept "
+"or reject your request. Once that's done you will either receive an email "
+"with a link to activate your account or an email informing you that your "
+"request has been rejected. Please wait!"
+msgstr ""
+"A sua conta foi criada! Aguarde até que a nossa administração aceite ou "
+"rejeite o seu pedido. Assim que isso acontecer, receberá um email com um "
+"link para ativar a sua conta ou um email informando que o seu pedido foi "
+"rejeitado. Por favor, aguarde!"
+
+#: .\webapp\views.py:599 .\webapp\views.py:702
+msgid "Activate your SmartTyre account."
+msgstr "Ative a sua conta SmartTyre."
+
+#: .\webapp\views.py:615
+msgid ""
+"Your account has been created! Please confirm your email address to complete "
+"the registration."
+msgstr ""
+"A sua conta foi criada! Por favor, confirme o seu endereço de email para "
+"concluir o registo."
+
+#: .\webapp\views.py:625
+msgid "Your account has been created! You can now login into your account!"
+msgstr "A sua conta foi criada! Agora pode autenticar-se na sua conta!"
+
+#: .\webapp\views.py:667
+msgid "The account request link is invalid! Please try again!"
+msgstr "O link de pedido de conta é inválido! Por favor, tente novamente!"
+
+#: .\webapp\views.py:677
+msgid "The account has already been accepted or rejected!"
+msgstr "A conta já foi aceite ou rejeitada!"
+
+#: .\webapp\views.py:718
+msgid "The account request has been accepted!"
+msgstr "O pedido de conta foi aceite!"
+
+#: .\webapp\views.py:728
+msgid "The account has been created!"
+msgstr "A conta foi criada!"
+
+#: .\webapp\views.py:736
+msgid "SmartTyre account request rejected."
+msgstr "Pedido de conta SmartTyre rejeitado."
+
+#: .\webapp\views.py:754
+msgid "The account request has been rejected!"
+msgstr "O pedido de conta foi rejeitado!"
+
+msgid ""
+"Your password can't be too similar to your other personal information."
+msgstr ""
+"A sua palavra-passe não pode ser tão similar às suas outras informações "
+"pessoais."
+
+msgid "Your password can't be a commonly used password."
+msgstr "A sua palavra-passe não pode ser uma palavra-passe comum."
+
+msgid "Your password can't be entirely numeric."
+msgstr "A sua palavra-passe não pode ser um número inteiro."

@@ -1,0 +1,6 @@
+{% load i18n %}
+{% autoescape off %}
+{% translate "Request from" %}{% include "includes/user.html" with user=user %}{% translate " to create a new SmartTyre account." %}
+{% translate "Please click on the link to confirm or deny the request," %}
+{{ scheme }}://{{ domain }}{% url "request" uidb64=uid token=token %}
+{% endautoescape %}

@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <div class="flex-fill align-self-center h-100 d-flex flex-column mw-100">
+        <div class="row my-3">
+            <h1 class="mt-auto text-center fw-normal mb-0">{% translate "Management" %}</h1>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 m-auto">
+                <div class="d-flex">
+                    <form class="flex-grow-1 me-2"
+                          method="post"
+                          novalidate
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="_method" value="post" />
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1 me-2">
+                                        <label for="files" class="form-label">{% translate "Crawlers' files" %}</label>
+                                        <input class="form-control" type="file" id="files" name="files" multiple />
+                                    </div>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div>
+                                                    <label for="upload" class="form-label invisible">" "</label>
+                                                    <button id="upload"
+                                                            class="form-control btn btn-outline-primary px-2"
+                                                            type="submit">{% translate "Upload" %}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="d-flex flex-column justify-content-end">
+                        <span data-bs-toggle="tooltip"
+                              title="{% translate "Remove all crawlers" %}">
+                            <button type="button"
+                                    class="btn btn-outline-danger"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#delete-crawlers-modal">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </span>
+                        <div class="modal fade text-start"
+                             id="delete-crawlers-modal"
+                             tabindex="-1"
+                             aria-labelledby="delete-crawlers-modal-label"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="delete-crawlers-modal-label">{% translate "Remove all crawlers" %}</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="m-0">{% translate "Are you sure you want to remove all crawlers?" %}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="post" novalidate>
+                                            {% csrf_token %}
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <button type="submit" class="btn btn-outline-danger">{% translate "Yes" %}</button>
+                                        </form>
+                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">{% translate "No" %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-fill row">
+            <div class="mx-auto col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 mb-3">
+                <div class="table-responsive bg-white border border-secondary rounded h-100 d-flex flex-column {% if crawlers|length > 0 %}justify-content-start{% else %}justify-content-center{% endif %}">
+                    {% if crawlers|length > 0 %}
+                        <table class="table table-striped mb-0 text-center align-middle">
+                            <thead>
+                                <tr>
+                                    <th>{% translate "Website" %}</th>
+                                    <th>{% translate "Action" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for crawler in crawlers %}
+                                    <tr>
+                                        <td>{{ crawler|capfirst }}</td>
+                                        <td>
+                                            <span data-bs-toggle="tooltip" title="{% translate "Remove crawler" %}">
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#delete-crawler-modal-{{ crawler.pk }}">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                            </span>
+                                            <div class="modal fade text-start"
+                                                 id="delete-crawler-modal-{{ crawler.pk }}"
+                                                 tabindex="-1"
+                                                 aria-labelledby="delete-crawler-modal-label-{{ crawler.pk }}"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="delete-crawler-modal-label-{{ crawler.pk }}">
+                                                                {% translate "Remove crawler - " %}{{ crawler|capfirst }}
+                                                            </h5>
+                                                            <button type="button"
+                                                                    class="btn-close"
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="m-0">
+                                                                {% translate "Are you sure you want to remove " %}{{ crawler|capfirst }}{% translate " as a crawler?" %}
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form method="post" novalidate>
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="_method" value="delete" />
+                                                                <input type="hidden" name="instance" value="{{ crawler.pk }}"/>
+                                                                <button type="submit" class="btn btn-outline-danger">{% translate "Yes" %}</button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">{% translate "No" %}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <h2 class="text-center fw-normal mb-0 align-middle">{% translate "No crawlers found" %}</h2>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

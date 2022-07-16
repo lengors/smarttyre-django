@@ -1,0 +1,425 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load filters %}
+{% block content %}
+    <div class="flex-fill align-self-center h-100 d-flex flex-column mw-100">
+        <div class="row my-3">
+            <h1 class="mt-auto text-center fw-normal mb-0">{% translate "Accounts" %}</h1>
+        </div>
+        <div class="flex-fill row mb-3">
+            <div class="mx-auto col col-md-10 col-lg-8 col-xl-6 col-xxl-4">
+                <div class="table-responsive bg-white border border-secondary rounded h-100 d-flex flex-column {% if accounts|length > 0 %}justify-content-start{% else %}justify-content-center{% endif %}">
+                    {% if accounts|length > 0 %}
+                        <table class="table table-striped mb-0 text-center align-middle">
+                            <thead>
+                                <tr>
+                                    <th>{% translate "Website" %}</th>
+                                    <th>{% translate "Username" %}</th>
+                                    <th>{% translate "Action" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for account in accounts %}
+                                    <tr>
+                                        <td>{{ account.instance.crawler|capfirst }}</td>
+                                        <td>{{ account.instance.username }}</td>
+                                        <td>
+                                            <span data-bs-toggle="tooltip" title="{% translate "Edit account" %}">
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-info"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modal-{{ account.instance.pk }}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+                                            </span>
+                                            <div class="d-inline-block">
+                                                <span data-bs-toggle="tooltip" title="{% translate "Remove account" %}">
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-outline-danger"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#delete-account-modal-{{ account.instance.pk }}">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <div class="modal fade text-start"
+                                                 id="delete-account-modal-{{ account.instance.pk }}"
+                                                 tabindex="-1"
+                                                 aria-labelledby="delete-account-modal-label-{{ account.instance.pk }}"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="delete-account-modal-label-{{ account.instance.pk }}">
+                                                                {% translate "Remove account - " %}{{ account.instance.crawler|capfirst }}
+                                                            </h5>
+                                                            <button type="button"
+                                                                    class="btn-close"
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="m-0">
+                                                                {% blocktranslate with crawler=account.instance.crawler|capfirst %}Are you sure you want to remove the account for the {{ crawler }} website? {% endblocktranslate %}
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form method="post" novalidate>
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="_method" value="delete" />
+                                                                <input type="hidden" name="instance" value="{{ account.instance.pk }}"/>
+                                                                <button type="submit" class="btn btn-outline-danger">{% translate "Yes" %}</button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">{% translate "No" %}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade text-start"
+                                                 id="modal-{{ account.instance.pk }}"
+                                                 tabindex="-1"
+                                                 aria-labelledby="modalLabel"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalLabel">{% translate "Edit account" %} - {{ account.instance.crawler|capfirst }}</h5>
+                                                            <button type="button"
+                                                                    class="btn-close"
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                        </div>
+                                                        <form method="post" novalidate>
+                                                            <div class="modal-body py-0">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" name="_method" value="put" />
+                                                                <input type="hidden" name="instance" value="{{ account.instance.pk }}" />
+                                                                <div class="row">
+                                                                    <div class="col my-3">{% include "includes/field.html" with field=account.username %}</div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col mb-3">{% include "includes/field.html" with field=account.password %}</div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col mb-3">{% include "includes/field.html" with field=account.confirm_password %}</div>
+                                                                </div>
+                                                                <div class="row d-block">
+                                                                    <div class="col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">{% include "includes/help.html" with form=form %}</div>
+                                                                </div>
+                                                                {% if account.non_field_errors %}
+                                                                    <div class="row">
+                                                                        <div class="col mb-3">
+                                                                            <div class="input-group has-validation">
+                                                                                <input type="text" class="form-control is-invalid d-none" />
+                                                                                <div class="invalid-feedback">{{ account.non_field_errors }}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button"
+                                                                        class="btn btn-outline-secondary"
+                                                                        data-bs-dismiss="modal">{% translate "Close" %}</button>
+                                                                <button type="submit" class="btn btn-outline-primary">{% translate "Save" %}</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% if account.has_changed and account.errors %}
+                                                <script>
+                                                    window.onload = function() {
+                                                        const modal = new bootstrap.Modal(document.getElementById('modal-{{ account.instance.pk }}'), {
+                                                            keyboard: false,
+                                                        });
+                                                        modal.show();
+                                                    };
+                                                </script>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <h2 class="text-center fw-normal mb-0 align-middle">{% translate "No accounts found" %}</h2>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3 col-xxl-2 mx-auto mb-3">
+                <div class="d-flex">
+                    <div class="flex-fill flex-grow-1 me-2">
+                        <div class="input-group">
+                            <button type="button"
+                                    class="btn btn-outline-primary flex-fill"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modal"
+                                    {% if available_crawlers|length == 0 %}disabled{% endif %}>
+                                {% translate "Add account" %}
+                            </button>
+                            <button type="button"
+                                    class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <button class="dropdown-item"
+                                            type="button"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modal-import">
+                                        {% translate "Import accounts" %}
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <span data-bs-toggle="tooltip"
+                              title="{% translate "Remove all accounts" %}">
+                            <button type="button"
+                                    class="btn btn-outline-danger"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#delete-accounts-modal">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </span>
+                        <div class="modal fade text-start"
+                             id="delete-accounts-modal"
+                             tabindex="-1"
+                             aria-labelledby="delete-accounts-modal-label"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="delete-accounts-modal-label">{% translate "Remove all accounts" %}</h5>
+                                        <button type="button"
+                                                class="btn-close"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="m-0">
+                                            {% translate "Are you sure you want to remove all accounts?" %}
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="post" novalidate>
+                                            {% csrf_token %}
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <button type="submit" class="btn btn-outline-danger">
+                                                {% translate "Yes" %}
+                                            </button>
+                                        </form>
+                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
+                                            {% translate "No" %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if available_crawlers|length > 0 %}
+        <div class="modal fade"
+             id="modal"
+             tabindex="-1"
+             aria-labelledby="modalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">
+                            {% translate "Add account" %}
+                        </h5>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close">
+                        </button>
+                    </div>
+                    <form method="post" novalidate>
+                        <div class="modal-body py-0">
+                            {% csrf_token %}
+                            <input type="hidden" name="_method" value="post" />
+                            <div class="row">
+                                <div class="col my-3">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label id="{{ form.crawler.auto_id }}-label"
+                                                   for="{{ form.crawler.auto_id }}"
+                                                   class="form-label">
+                                                <small>{% translate "Website" %}</small>
+                                            </label>
+                                            <div class="input-group has-validation">
+                                                <select name="{{ form.crawler.name }}"
+                                                        class="form-select {% if form.crawler.errors %}is-invalid{% elif form.has_changed %}is-valid{% endif %}"
+                                                        id="{{ form.crawler.auto_id }}">
+                                                    <option {% if not form.crawler.value %}selected{% endif %}>
+                                                        {% translate "Select a Website" %}
+                                                    </option>
+                                                    {% for crawler in available_crawlers %}
+                                                        <option value="{{ crawler.pk }}"
+                                                                {% if form.crawler.value|quote == crawler.pk|quote %}selected{% endif %}>
+                                                            {{ crawler|capfirst }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                                {% if form.crawler.help_text %}
+                                                    <button type="button"
+                                                            class="btn btn-outline-secondary btn-sm"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#{{ form.crawler.auto_id }}-help"
+                                                            aria-expanded="false"
+                                                            aria-controls="{{ form.crawler.auto_id }}-help">
+                                                        <i class="fa-solid fa-circle-info"></i>
+                                                    </button>
+                                                {% endif %}
+                                                {% if form.crawler.errors %}
+                                                    <div class="invalid-feedback">
+                                                        {{ form.crawler.errors }}
+                                                    </div>
+                                                {% elif form.has_changed %}
+                                                    <div class="valid-feedback">
+                                                        {% translate "Looks good!" %}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    {% include "includes/field.html" with field=form.username %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    {% include "includes/field.html" with field=form.password %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    {% include "includes/field.html" with field=form.confirm_password %}
+                                </div>
+                            </div>
+                            <div class="row d-block">
+                                <div class="col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                                    {% include "includes/help.html" with form=form %}
+                                </div>
+                            </div>
+                            {% if form.non_field_errors %}
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <div class="input-group has-validation">
+                                            <input type="text" class="form-control is-invalid d-none" />
+                                            <div class="invalid-feedback">
+                                                {{ form.non_field_errors }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"
+                                    class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">
+                                {% translate "Close" %}
+                            </button>
+                            <button type="submit" class="btn btn-outline-primary">
+                                {% translate "Save" %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% if form.has_changed and form.errors %}
+            <script>
+            window.onload = function() {
+                const modal = new bootstrap.Modal(document.getElementById('modal'), {
+                    keyboard: false,
+                });
+                modal.show();
+            };
+            </script>
+        {% endif %}
+    {% endif %}
+    <div class="modal fade"
+         id="modal-import"
+         tabindex="-1"
+         aria-labelledby="modalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">
+                        {% translate "Import accounts" %}
+                    </h5>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                    </button>
+                </div>
+                <form method="post" novalidate enctype="multipart/form-data">
+                    <div class="modal-body py-0">
+                        {% csrf_token %}
+                        <input type="hidden" name="_method" value="fetch" />
+                        <div class="row">
+                            <div class="col my-3">
+                                {% include "includes/group.html" with field=file_form.file %}
+                            </div>
+                        </div>
+                        <div class="row d-block">
+                            <div class="col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                                {% include "includes/help.html" with form=form %}
+                            </div>
+                        </div>
+                        {% if file_form.non_field_errors %}
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <div class="input-group has-validation">
+                                        <input type="text" class="form-control is-invalid d-none" />
+                                        <div class="invalid-feedback">
+                                            {{ file_form.non_field_errors }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-outline-secondary"
+                                data-bs-dismiss="modal">
+                            {% translate "Close" %}
+                        </button>
+                        <button type="submit" class="btn btn-outline-primary">
+                            {% translate "Import" %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if file_form.has_changed and file_form.errors %}
+        <script>
+            window.onload = function() {
+                const modal = new bootstrap.Modal(document.getElementById('modal-import'), {
+                    keyboard: false,
+                });
+                modal.show();
+            };
+        </script>
+    {% endif %}
+{% endblock content %}

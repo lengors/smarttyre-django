@@ -1,0 +1,209 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="Same-Site" content="Strict" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="SmartTyre official web application" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="keywords" content="tyre,search,crawler" />
+        <title>SmartTyre</title>
+        <link rel="icon" type="image/x-icon" href="{% static "favicon.svg" %}"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+              integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="{% static "smarttyre/css/styles.css" %}"/>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{% static "smarttyre/js/tooltip.js" %}"></script>
+        {% if request.resolver_match.url_name == "home" %}
+            <link rel="stylesheet"
+                  href="{% static "angular/"|add:ANGULAR_LANGUAGE|add:"/css/styles.css" %}"/>
+            <script type="module"
+                    src="{% static "angular/"|add:ANGULAR_LANGUAGE|add:"/js/runtime.js" %}"
+                    nonce="{{ request.csp_nonce }}"></script>
+            <script type="module"
+                    src="{% static "angular/"|add:ANGULAR_LANGUAGE|add:"/js/polyfills.js" %}"
+                    nonce="{{ request.csp_nonce }}"></script>
+            <script type="module"
+                    src="{% static "angular/"|add:ANGULAR_LANGUAGE|add:"/js/main.js" %}"
+                    nonce="{{ request.csp_nonce }}"></script>
+        {% else %}
+            <link rel="stylesheet"
+                  href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+                  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+                  crossorigin="anonymous"/>
+            <link rel="stylesheet"
+                  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+                  integrity="sha384-eoTu3+HydHRBIjnCVwsFyCpUDZHZSFKEJD0mc3ZqSBSb6YhZzRHeiomAUWCstIWo"
+                  crossorigin="anonymous"/>
+        {% endif %}
+    </head>
+    <body class="h-100 pt-5 bg-light d-flex">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+                <div class="container-lg container-fluid">
+                    <a class="navbar-brand" href="#">SmartTyre</a>
+                    {% if user.is_authenticated %}
+                        <button class="navbar-toggler collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbar"
+                                aria-controls="navbar"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse" id="navbar">
+                            <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                                <li class="nav-item text-center">
+                                    <a class="nav-link {% if request.resolver_match.url_name == "home" %}disabled{% endif %}"
+                                       href="{% url "home" %}">
+                                        <i class="fa-solid fa-house"></i> {% translate "Home" %}
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link {% if request.resolver_match.url_name == "accounts" %}disabled{% endif %}"
+                                       href="{% url "accounts" %}">
+                                        <i class="fa-solid fa-user"></i> {% translate "Accounts" %}
+                                    </a>
+                                </li>
+                                {% if user.is_staff %}
+                                    <li class="nav-item text-center">
+                                        <a class="nav-link {% if request.resolver_match.url_name == "management" %}disabled{% endif %}"
+                                           href="{% url "management" %}">
+                                            <i class="fa-solid fa-screwdriver-wrench"></i> {% translate "Management" %}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                            <div class="navbar-nav ms-auto">
+                                <div class="nav-item dropdown text-light text-center">
+                                    <span>{% translate "Welcome," %}</span>
+                                    <a class="nav-link dropdown-toggle d-inline-block ps-0"
+                                       href="#"
+                                       id="dropdown"
+                                       role="button"
+                                       data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        {% if user.first_name %}
+                                            {{ user.first_name }}
+                                        {% else %}
+                                            {{ user.username }}
+                                        {% endif %}
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-dark align-center m-auto user"
+                                        aria-labelledby="navbarDarkDropdownMenuLink">
+                                        <li>
+                                            <a class="dropdown-item {% if request.resolver_match.url_name == "profile" %}disabled{% endif %}"
+                                               href="{% url "profile" %}">{% translate "Edit profile" %}</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#delete-profile-modal"
+                                               href="#">{% translate "Delete profile" %}</a>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider"/>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{% url "logout" %}">{% translate "Logout" %}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </nav>
+        </header>
+        {% if messages %}
+            <div role="main" class="fixed-top mx-auto mt-5">
+                <div class="row g-3 mt-2">
+                    <div class="col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 mx-auto sticky-top">
+                        {% for message in messages %}
+                            {% if message.tags == "success" %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    {{ message }}
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% elif message.tags == "info" %}
+                                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    {{ message }}
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% elif message.tags == "warning" %}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    {{ message }}
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% elif message.tags == "error" %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    {{ message }}
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% else %}
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <main role="main" class="container-fluid mx-auto pt-2 d-flex flex-wrap">
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <div class="modal fade"
+             id="delete-profile-modal"
+             tabindex="-1"
+             aria-labelledby="delete-profile-modal-label"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="delete-profile-modal-label">{% translate "Delete profile" %}</h5>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="m-0">{% translate "Are you sure you want to delete your profile?" %}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{% url "profile_delete" %}" method="post" novalidate>
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger">{% translate "Yes" %}</button>
+                        </form>
+                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">{% translate "No" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

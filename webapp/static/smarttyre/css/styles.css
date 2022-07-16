@@ -1,0 +1,18 @@
+.display-modal .modal {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    z-index: 1;
+    display: block;
+}
+
+.dropdown-menu.user {
+    max-width: 150px !important;
+    min-width: 150px !important;
+}
+
+.errorlist {
+    margin: 0 !important;
+}

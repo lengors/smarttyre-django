@@ -1,0 +1,11 @@
+{% load i18n %}
+<div class="row">
+    <div class="col">
+        <label id="{{ field.id_for_label }}"
+               for="{{ field.auto_id }}"
+               class="form-label">
+            <small>{{ field.label }}</small>
+        </label>
+        {% include "includes/group.html" with field=field %}
+    </div>
+</div>

@@ -1,0 +1,6 @@
+{% load i18n %}
+{% autoescape off %}
+{% translate "Hello" %}{% include "includes/user.html" with user=user %}{% translate ", you have request a new email. Once that email has been confirmed, the old email will be discarded." %}
+
+{% translate "If you did not request this action, please ignore this email." %}
+{% endautoescape %}

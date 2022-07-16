@@ -1,0 +1,13 @@
+<div class="accordion" id="help">
+    {% for field in form %}
+        {% if field.help_text %}
+            <div class="mb-3 col-12 accordion-collapse collapse"
+                 data-bs-parent="#help"
+                 id="{{ field.auto_id }}-help">
+                <div class="card card-body text-justify">
+                    <small>{{ field.help_text }}</small>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <form class="my-auto flex-fill align-self-center" method="post" novalidate>
+        {% csrf_token %}
+        <div class="row my-3">
+            <h1 class="mt-auto text-center fw-normal mb-0">
+                {% translate "Change your password" %}
+                <span class="fs-6 align-top">
+                    <i class="fa-solid fa-circle-info"
+                       data-bs-toggle="tooltip"
+                       title="{% translate "Enter your old password bellow, as well as the new password." %}"></i>
+                </span>
+            </h1>
+        </div>
+        <div class="row mb-3">
+            <div class="col-10 col-sm-6 col-md-5 col-lg-4 col-xxl-3 m-auto">
+                {% include "includes/field.html" with field=form.old_password %}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-10 col-sm-6 col-md-5 col-lg-4 col-xxl-3 m-auto">
+                {% include "includes/field.html" with field=form.new_password1 %}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-10 col-sm-6 col-md-5 col-lg-4 col-xxl-3 m-auto">
+                {% include "includes/field.html" with field=form.new_password2 %}
+            </div>
+        </div>
+        <div class="row d-block">
+            <div class="col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 m-auto">{% include "includes/help.html" with form=form %}</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3 col-xxl-2 m-auto">
+                <button type="submit" class="w-100 btn btn-primary">{% translate "Change password" %}</button>
+            </div>
+        </div>
+        {% if form.non_field_errors %}
+            <div class="row mb-3">
+                <div class="col-10 col-sm-6 col-md-4 col-lg-3 col-xxl-2 m-auto">
+                    <div class="input-group has-validation">
+                        <input type="text" class="form-control is-invalid d-none" />
+                        <div class="invalid-feedback">{{ form.non_field_errors }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </form>
+{% endblock content %}
