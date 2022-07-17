@@ -1,4 +1,3 @@
-import os
 import sched
 import logging
 
@@ -47,42 +46,35 @@ def report(scheduler: sched.scheduler) -> None:
             superuser = User.objects.filter(is_superuser=True).first()
 
             # Check if the log exists and the superuser exists
-            if os.path.isfile(handler.baseFilename) and superuser is not None and settings.EMAIL_CONFIRMATION_ENABLE:
+            if superuser is not None and settings.EMAIL_CONFIRMATION_ENABLE:
 
-                # Initialize the log content
-                content = None
+                # Seek initial position to the beginning of the file
+                handler.stream.seek(0)
 
-                # Read the log
-                with open(handler.baseFilename, 'r') as fin:
+                # Read from stream
+                content = handler.stream.read()
 
-                    # Read the log content
-                    content = fin.read()
+                # Reset log
+                handler.stream.seek(0)
+                handler.stream.truncate()
 
-                # Reset the log
-                with open(handler.baseFilename, 'w') as fout:
-                    fout.flush()
+                # Get today's date
+                day = day.strftime("%d-%m-%Y")
 
-                # Check if the content is not empty
-                if content is not None:
+                # Create mail subject
+                mail_subject = _(f'SmartTyre report {day}')
 
-                    # Get today's date
-                    day = day.strftime("%d-%m-%Y")
+                # Create mail body
+                mail_body = f'{mail_subject}.'
 
-                    # Create mail subject
-                    mail_subject = _(f'SmartTyre report {day}')
+                # Create mail
+                mail = EmailMessage(mail_subject, mail_body, to=[superuser.email])
 
-                    # Create mail body
-                    mail_body = f'{mail_subject}.'
+                # Add log file as attachment
+                mail.attach(f'report_{day}.log', content, 'text/plain')
 
-                    # Create mail
-                    mail = EmailMessage(
-                        mail_subject, mail_body, to=[superuser.email])
-
-                    # Add log file as attachment
-                    mail.attach(f'report_{day}.log', content, 'text/plain')
-
-                    # Send mail
-                    mail.send()
+                # Send mail
+                mail.send()
 
         finally:
 

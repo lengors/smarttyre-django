@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import io
 import os
 import dotenv
 import logging
@@ -272,4 +273,4 @@ if FIELD_ENCRYPTION_KEY is None:
 
 # Setup logging
 
-logging.basicConfig(level=logging.DEBUG, filename='main.smarttyre.log')
+logging.basicConfig(level=logging.DEBUG, stream=io.StringIO())
