@@ -42,10 +42,11 @@ else:
     raise ValueError('DJANGO_ENVIRONMENT is invalid')
 
 # Setup allowed hosts
+HOSTNAME = os.environ.get('HOSTNAME', 'localhost')
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+    ALLOWED_HOSTS = ['127.0.0.1', HOSTNAME]
 
 
 # Application definition
@@ -221,8 +222,8 @@ CSP_INCLUDE_NONCE_IN = ('script-src',)
 CSP_FRAME_ANCESTORS = ('\'none\'',)
 CSP_DEFAULT_SRC = ('\'none\'', )
 CSP_CONNECT_SRC = ('\'self\'',
-                   'ws://smarttyre.herokuapp.com/tyres/',
-                   'wss://smarttyre.herokuapp.com/tyres/',)
+                   f'ws://{HOSTNAME}/tyres/',
+                   f'wss://{HOSTNAME}/tyres/',)
 CSP_FORM_ACTION = ('\'self\'',)
 CSP_OBJECT_SRC = ('\'none\'', )
 CSP_BASE_URI = ('\'none\'', )

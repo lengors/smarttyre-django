@@ -78,9 +78,8 @@ class TyresConsumer(AsyncWebsocketConsumer):
         if self.__fetcher is not None:
 
             # Wait for crawlers to stop
-            for batch in self.__fetcher:
-                for _ in batch:
-                    pass
+            for _ in self.__fetcher:
+                pass
 
             # Reset fetcher
             self.__fetcher = None
@@ -119,7 +118,7 @@ class TyresConsumer(AsyncWebsocketConsumer):
         try:
 
             # Get next products
-            next_products = list(next(self.__fetcher))
+            _, _, next_products = next(self.__fetcher)
 
             # Send next products
             await self.send(text_data=json.dumps({
